@@ -7,11 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.6" />
+    <PackageReference Include="NHibernate" Version="5.6.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\GestaoClientes.Application\GestaoClientes.Application.csproj" />
+    <ProjectReference Include="..\GestaoClientes.Infrastructure\GestaoClientes.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
