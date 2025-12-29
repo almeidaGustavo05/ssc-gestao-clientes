@@ -3,7 +3,7 @@ namespace GestaoClientes.Domain.Common
 {
     public abstract class Entity
     {
-        public Guid Id { get; protected set; }
+        public virtual Guid Id { get; protected set; }
 
         protected Entity()
         {
@@ -42,7 +42,7 @@ namespace GestaoClientes.Domain.Common
                 return base.GetHashCode();
         }
 
-        public bool IsTransient()
+        public virtual bool IsTransient()
         {
             return this.Id == default(Guid);
         }
