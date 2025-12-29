@@ -6,8 +6,8 @@ namespace GestaoClientes.Domain.Clientes
 {
     public interface IClienteRepository : IRepository<Cliente>
     {
-        Task<Cliente?> ObterPorId(Guid id);
-        Task<Cliente?> ObterPorCnpj(Cnpj cnpj);
-        Task<bool> ExisteCnpj(Cnpj cnpj);
+        Task<Cliente?> ObterPorId(Guid id, CancellationToken cancellationToken);
+        Task<Cliente?> ObterPorCnpj(Cnpj cnpj, CancellationToken cancellationToken);
+        Task<bool> ExisteCnpj(Cnpj cnpj, CancellationToken cancellationToken);
     }
 }
