@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using GestaoClientes.Application.Features.Clientes.Commands.CriaCliente;
 using GestaoClientes.Application.Features.Clientes.Queries.ObtemClientePorId;
-using GestaoClientes.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,23 +21,22 @@ namespace GestaoClientes.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Criar([FromBody] CriaClienteCommand command)
         {
-            try
-            {
-                var id = await _mediator.Send(command);
-                return CreatedAtAction(nameof(ObterPorId), new { id = id }, new { id = id });
-            }
-            catch (DomainException ex)
-            {
-                return BadRequest(new { error = ex.Message });
-            }
+            var id = await _mediator.Send(command);
+
+            return CreatedAtAction(
+                nameof(ObterPorId),
+                new { id },
+                new { id }
+            );
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> ObterPorId(Guid id)
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<ClienteDto>> ObterPorId(Guid id)
         {
-            var cliente = await _mediator.Send(new ObtemClientePorIdQuery(id));
+            var query = new ObtemClientePorIdQuery(id);
+            var cliente = await _mediator.Send(query);
 
-            if (cliente == null)
+            if (cliente is null)
                 return NotFound();
 
             return Ok(cliente);
