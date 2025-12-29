@@ -1,0 +1,13 @@
+services:
+  gestaoclientes.api:
+    image: gestaoclientes-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Data Source=/app/data/gestao_clientes.db;Version=3;
+    volumes:
+      - ./data:/app/data

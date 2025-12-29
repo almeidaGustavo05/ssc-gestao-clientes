@@ -5,11 +5,11 @@ namespace GestaoClientes.Domain.Clientes
 {
     public class Cliente : Entity, IAggregateRoot
     {
-        public string Nome { get; private set; }
-        public string Email { get; private set; }
-        public Cnpj Cnpj { get; private set; }
-        public bool Ativo { get; private set; }
-        public DateTime DataCadastro { get; private set; }
+        public virtual string Nome { get; protected set; }
+        public virtual string Email { get; protected set; }
+        public virtual Cnpj Cnpj { get; protected set; }
+        public virtual bool Ativo { get; protected set; }
+        public virtual DateTime DataCadastro { get; protected set; }
 
         protected Cliente() 
         {
@@ -33,7 +33,7 @@ namespace GestaoClientes.Domain.Clientes
             DataCadastro = DateTime.UtcNow;
         }
 
-        public void AtualizarDados(string nome, string email)
+        public virtual void AtualizarDados(string nome, string email)
         {
             if (string.IsNullOrWhiteSpace(nome))
                 throw new DomainException("O nome é obrigatório.");
@@ -45,12 +45,12 @@ namespace GestaoClientes.Domain.Clientes
             Email = email;
         }
 
-        public void Desativar()
+        public virtual void Desativar()
         {
             Ativo = false;
         }
 
-        public void Ativar()
+        public virtual void Ativar()
         {
             Ativo = true;
         }
